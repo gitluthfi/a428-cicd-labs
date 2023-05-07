@@ -17,9 +17,6 @@ pipeline {
                 }
             }
         stage('Deploy') {
-            when {
-                expression { params.APPROVER == 'Proceed' }
-            }
             steps {
                 sh './jenkins/scripts/deploy.sh' 
             }
