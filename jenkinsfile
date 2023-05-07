@@ -27,14 +27,14 @@ pipeline {
                 }
             }
         }
-        stage('Deploy') {
-            when {
-                expression { params.APPROVER == 'Proceed' }
-            }
-            steps {
-                sh './jenkins/scripts/deliver.sh' 
-                sh 'sleep 1m && ./jenkins/scripts/kill.sh' 
-            }
+     stage('Deploy') {
+    steps {
+        if (params.APPROVER == 'Proceed') {
+            sh './jenkins/scripts/deliver.sh' 
+            sh 'sleep 1m && ./jenkins/scripts/kill.sh'
+        } else {
+            echo 'Deployment dibatalkan oleh pengguna'
         }
     }
 }
+
