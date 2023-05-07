@@ -11,20 +11,14 @@ pipeline {
                 sh 'npm install'
             }
         }
-        stage('Manual Approval') {
+stage('Manual Approval') {
             steps {
-                script {
-                    def userInput = input message: 'Lanjutkan ke tahap Deploy?',
-                        ok: 'Proceed',
-                        submitterParameter: 'APPROVER',
-                        parameters: [
-                            string(name: 'Komentar', defaultValue: '', description: 'Masukkan komentar Anda')
-                        ],
-                        abort: 'Abort'
-                    if (userInput == null) {
-                        error('Pipeline dihentikan oleh pengguna')
-                    }
-                }
+                input message: 'Lanjutkan ke tahap Deploy?',
+                    ok: 'Proceed',
+                    submitterParameter: 'APPROVER',
+                    parameters: [
+                        string(name: 'Komentar', defaultValue: '', description: 'Masukkan komentar Anda')
+                    ]
             }
         }
         stage('Deploy') {
