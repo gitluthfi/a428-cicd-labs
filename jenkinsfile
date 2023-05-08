@@ -18,8 +18,10 @@ pipeline {
             }
         stage('Deploy') {
             steps {
-                sh './jenkins/scripts/deploy.sh' 
-                sh 'sleep 1m && ./jenkins/scripts/kill.sh' 
+                sh 'chmod +x jenkins/scripts/deploy.sh'
+                sh 'chmod +x jenkins/scripts/kill.sh'
+                sh '. jenkins/scripts/deploy.sh' 
+                sh 'sleep 1m && . jenkins/scripts/kill.sh' 
             }
         }
     }
